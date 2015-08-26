@@ -403,17 +403,17 @@ namespace Calculator
 
             if ((element.Length == 1) && !this.resultBox.Text.StartsWith("-"))
             {
-                this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '-') + element[0];
+                if (this.resultBox.Text.StartsWith("+"))
+                {
+                    this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '-');
+                }
 
+               else  this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '-') + element[0];
             }
             else if (element.Length == 1 && this.resultBox.Text.StartsWith("-"))
             {
                 this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '+');
-
             }
-
-
-
         }
     }
 }
