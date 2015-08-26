@@ -382,38 +382,38 @@ namespace Calculator
         private void multiplyButton_Click(object sender, EventArgs e)
         {
             insertOperand('*');
-            // MessageBox.Show("This function is not implemented yet!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void decreaseButton_Click(object sender, EventArgs e)
         {
             insertOperand('-');
-            //MessageBox.Show("This function is not implemented yet!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void increaseButton_Click(object sender, EventArgs e)
         {
             insertOperand('+');
-            //MessageBox.Show("This function is not implemented yet!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void changeSign_Click(object sender, EventArgs e)
         {
+            /*
+            change sign on oposit in front of the element
+            */
             string[] element = this.resultBox.Text.Split(operandChar);
 
             if ((element.Length == 1) && !this.resultBox.Text.StartsWith("-"))
             {
-                this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '-')+element[0];
-              
+                this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '-') + element[0];
+
             }
-           else if (element.Length==1 && this.resultBox.Text.StartsWith("-"))
+            else if (element.Length == 1 && this.resultBox.Text.StartsWith("-"))
             {
                 this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '+');
 
             }
-           
 
-            
+
+
         }
     }
 }
