@@ -46,6 +46,21 @@ namespace Calculator
             zero2 = false;
             operandChar = '\0';
         }
+        private string[] getElements()
+        {
+            string[] element = this.resultBox.Text.Split(operandChar);
+            return element;
+
+        }
+        private void amendForm(string str, bool amend = true)
+        {
+            if (amend)
+            {
+                this.resultBox.Text = str;
+            }
+            else this.resultBox.Text += str;
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -76,12 +91,12 @@ namespace Calculator
                     /*
                     TODO: 
                     */
-                    string[] elements = this.resultBox.Text.Split(operandChar);
+                    //string[] elements = this.resultBox.Text.Split(operandChar);
                     int offset = 0;
                     string multiplier = "";
-                    getElementSign(ref offset, ref multiplier, elements.Length);
-                    double left = double.Parse(multiplier + elements[0 + offset]);
-                    double right = double.Parse(elements[1 + offset]);
+                    getElementSign(ref offset, ref multiplier, getElements().Length);
+                    double left = double.Parse(multiplier + getElements()[0 + offset]);
+                    double right = double.Parse(getElements()[1 + offset]);
                     switch (operandChar)
                     {
                         case '+':
@@ -154,21 +169,12 @@ namespace Calculator
         {
             zero1 = false;
             zero2 = true;
-            /*
-            */
-            if (!zero1 && (this.resultBox.Text[0] != '0') || (this.resultBox.Text.Contains('.')))
+
+            if (!zero1 && (this.resultBox.Text[0] != '0'))
             {
-                this.resultBox.Text += "0";
-                zero1 = true;
-                zero2 = true;
+                amendForm("0", false);
             }
 
-            if ((this.resultBox.Text.Last() == '/'))
-            {
-                this.resultBox.Text += "0.";
-                zero1 = false;
-                // zero2 = false;
-            }
 
         }
 
@@ -176,7 +182,7 @@ namespace Calculator
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "1";
+                amendForm("1");
                 decimal1 = true;
                 //decimal2 = false;
             }
@@ -184,7 +190,7 @@ namespace Calculator
             {
                 decimal1 = true;
                 //decimal2 = false;
-                this.resultBox.Text += "1";
+                amendForm("1", false);
             }
             //zero1 = true;
         }
@@ -193,76 +199,72 @@ namespace Calculator
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "2";
+                amendForm("2");
             }
-            else this.resultBox.Text += "2";
+            else amendForm("2", false);
         }
 
         private void threeButton_Click(object sender, EventArgs e)
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "3";
+                amendForm("3");
             }
-
-            else this.resultBox.Text += "3";
+            else amendForm("3", false);
         }
 
         private void FourButton_Click_1(object sender, EventArgs e)
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "4";
+                amendForm("4");
             }
-
-            else this.resultBox.Text += "4";
+            else amendForm("4", false);
         }
 
         private void fiveButton_Click(object sender, EventArgs e)
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "5";
+                amendForm("5");
             }
-
-            else this.resultBox.Text += "5";
+            else amendForm("5", false);
         }
 
         private void sixButton_Click(object sender, EventArgs e)
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "6";
+                amendForm("6");
             }
-
-            else this.resultBox.Text += "6";
+            else amendForm("6", false);
         }
 
         private void sevenButton_Click(object sender, EventArgs e)
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "7";
+                amendForm("7");
             }
-            else this.resultBox.Text += "7";
+            else amendForm("7", false);
         }
 
         private void eightButton_Click(object sender, EventArgs e)
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "8";
+                amendForm("8");
             }
-            else this.resultBox.Text += "8";
+            else amendForm("8", false);
         }
 
         private void nineButton_Click(object sender, EventArgs e)
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
-                this.resultBox.Text = "9";
+                amendForm("9");
             }
-            else this.resultBox.Text += "9";
+            else amendForm("9", false);
         }
 
         private void backSpaceButton_Click(object sender, EventArgs e)
@@ -285,7 +287,7 @@ namespace Calculator
 
             if (this.resultBox.Text.Length == 0)
             {
-                this.resultBox.Text = "0";
+                amendForm("0", false);
                 zero1 = true;
                 decimal1 = false;
                 decimal2 = false;
@@ -315,7 +317,7 @@ namespace Calculator
 
 
             // canSet(canSetBool);
-            if (canSetBool) this.resultBox.Text += ".";
+            if (canSetBool) amendForm(".", false);
 
 
         }
@@ -323,8 +325,8 @@ namespace Calculator
         private void percentButton_Click(object sender, EventArgs e)
         {
             double percent = 0;
-            string[] element = this.resultBox.Text.Split(operandChar);
-            if (element.Length == 1)
+            //string[] element = this.resultBox.Text.Split(operandChar);
+            if (getElements().Length == 1)
             {
                 /*
                 As normal calculator (MS calculator) is preventing as calculate % from 1 number and return is 0
@@ -336,18 +338,18 @@ namespace Calculator
                 this.resultBox.Text = percent.ToString();
                 */
 
-                this.resultBox.Text = "0";
+                amendForm("0", false);
             }
-            if (element.Length > 1)
+            if (getElements().Length > 1)
             {
                 /*
                 When calculation with % is done for last element in field we want 
                 that calculator showing as full result what will be
                 Like: 2+200%=4
                 */
-                percent = double.Parse(element[element.Length - 1]) / 100;
-                this.resultBox.Text = this.resultBox.Text.Substring(0, this.resultBox.Text.LastIndexOf(operandChar) + 1);
-                this.resultBox.Text += percent.ToString();
+                percent = double.Parse(getElements()[getElements().Length - 1]) / 100;
+                amendForm(this.resultBox.Text.Substring(0, this.resultBox.Text.LastIndexOf(operandChar) + 1), false);
+                amendForm(percent.ToString(), true);
                 getResult();
             }
         }
@@ -355,17 +357,20 @@ namespace Calculator
         private void sqrtButton_Click(object sender, EventArgs e)
         {
             double sqrt = 0;
-            string[] element = this.resultBox.Text.Split(operandChar);
-            if (element.Length == 1)
+            //string[] element = this.resultBox.Text.Split(operandChar);
+            if (getElements().Length == 1)
             {
-                sqrt = Math.Sqrt(double.Parse(element[0]));
-                this.resultBox.Text = sqrt.ToString();
+                sqrt = Math.Sqrt(double.Parse(getElements()[0]));
+                amendForm(sqrt.ToString(), true);
+                // this.resultBox.Text = sqrt.ToString();
             }
-            if (element.Length > 1)
+            if (getElements().Length > 1)
             {
-                sqrt = Math.Sqrt(double.Parse(element[element.Length - 1]));
-                this.resultBox.Text = this.resultBox.Text.Substring(0, this.resultBox.Text.LastIndexOf(operandChar) + 1);
-                this.resultBox.Text += sqrt.ToString();
+                sqrt = Math.Sqrt(double.Parse(getElements()[getElements().Length - 1]));
+                amendForm(this.resultBox.Text.Substring(0, this.resultBox.Text.LastIndexOf(operandChar) + 1), true);
+
+                amendForm(sqrt.ToString(), false);
+                //this.resultBox.Text += sqrt.ToString();
             }
         }
 
@@ -377,6 +382,7 @@ namespace Calculator
         private void divideButton_Click(object sender, EventArgs e)
         {
             insertOperand('/');
+            zero1 = true;
         }
 
         private void multiplyButton_Click(object sender, EventArgs e)
@@ -399,21 +405,15 @@ namespace Calculator
             /*
             change sign on oposit in front of the element
             */
-            string[] element = this.resultBox.Text.Split(operandChar);
-
-            if ((element.Length == 1) && !this.resultBox.Text.StartsWith("-"))
+            //string[] element = this.resultBox.Text.Split(operandChar);
+            if (getElements().Length == 1)
             {
-                if (this.resultBox.Text.StartsWith("+"))
-                {
-                    this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '-');
-                }
+                double convertedNum = double.Parse(getElements()[0]) * -1;
+                amendForm(convertedNum.ToString(), true);
 
-               else  this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '-') + element[0];
+                //  this.resultBox.Text = convertedNum.ToString();
             }
-            else if (element.Length == 1 && this.resultBox.Text.StartsWith("-"))
-            {
-                this.resultBox.Text = this.resultBox.Text.Replace(this.resultBox.Text[0], '+');
-            }
+            else return;
         }
     }
 }
