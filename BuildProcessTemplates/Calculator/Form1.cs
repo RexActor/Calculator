@@ -40,6 +40,9 @@ namespace Calculator
             this.StartPosition = FormStartPosition.CenterScreen;
 
             InitializeComponent();
+           
+
+
         }
 
         private void resetForm()
@@ -172,6 +175,18 @@ namespace Calculator
                         this.resultBox.Text += whichOperand;
                         break;
                 }
+            }
+        }
+
+        //check if numpad key is pressed 
+
+           private void KeyPress(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.NumPad0)
+            {
+                this.resultBox.Text = "0";
+
             }
         }
 

@@ -12,6 +12,7 @@ namespace Calculator
 {
     public partial class Form1 : Form
     {
+        
         //bool implemented;
         bool decimal1; //true -> blocks you to add decimal point
         bool decimal2; //true -> blocks you to add decimal point
@@ -33,6 +34,9 @@ namespace Calculator
 
             */
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+           
             InitializeComponent();
         }
 
@@ -65,6 +69,33 @@ namespace Calculator
         private void Form1_Load(object sender, EventArgs e)
         {
             this.resultBox.Text += "0";
+
+           
+            divideButton.TabStop = false;
+            increaseButton.TabStop = false;
+            multiplyButton.TabStop = false;
+            decreaseButton.TabStop = false;
+            zeroButton.TabStop = false;
+            oneButton.TabStop = false;
+            twoButton.TabStop = false;
+            threeButton.TabStop = false;
+            fourButton.TabStop = false;
+            fiveButton.TabStop = false;
+            sixButton.TabStop = false;
+            sevenButton.TabStop = false;
+            eightButton.TabStop = false;
+            nineButton.TabStop = false;
+            sqrtButton.TabStop = false;
+            equalSign.TabStop = false;
+            percentButton.TabStop = false;
+            decimalPoint.TabStop = false;
+            resultBox.TabStop = false;
+            backSpaceButton.TabStop = false;
+            clearButton.TabStop = false;
+            sqrtButton.TabStop = false;
+            changeSign.TabStop = false;
+
+
 
         }
 
@@ -178,7 +209,89 @@ namespace Calculator
 
         }
 
-        private void oneButton_Click(object sender, EventArgs e)
+
+
+        //detects if key is pressed and amends form
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.NumPad0)
+            {
+                zeroButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad1)
+            {
+                oneButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad2)
+            {
+                twoButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad3)
+            {
+                threeButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad4)
+            {
+                fourButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad5)
+            {
+                fiveButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad6)
+            {
+                sixButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad7)
+            {
+                sevenButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad8)
+            {
+                eightButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.NumPad9)
+            {
+                nineButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Multiply)
+            {
+                multiplyButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Divide)
+            {
+                divideButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Add)
+            {
+                increaseButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Subtract)
+            {
+                decreaseButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Enter)
+            {
+               equalSign.PerformClick();
+            }
+            if (e.KeyCode == Keys.Delete)
+            {
+                clearButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Decimal)
+            {
+                decimalPoint.PerformClick();
+            }
+            if (e.KeyCode == Keys.Back)
+            {
+                backSpaceButton.PerformClick();
+            }
+
+        }
+
+            private void oneButton_Click(object sender, EventArgs e)
         {
             if (this.resultBox.Text.StartsWith("0") && this.resultBox.Text.Length == 1)
             {
@@ -325,7 +438,7 @@ namespace Calculator
         private void percentButton_Click(object sender, EventArgs e)
         {
             double percent = 0;
-            //string[] element = this.resultBox.Text.Split(operandChar);
+            string[] element = this.resultBox.Text.Split(operandChar);
             if (getElements().Length == 1)
             {
                 /*
@@ -333,10 +446,10 @@ namespace Calculator
                 we will implement the same feature here.
                 If we in future want to change that option. Function bellow is working properly - x%=x/100
                 */
-                /*
+                
                 percent = (((double.Parse(element[0]) / 100)));
                 this.resultBox.Text = percent.ToString();
-                */
+               
 
                 amendForm("0", false);
             }
@@ -415,5 +528,6 @@ namespace Calculator
             }
             else return;
         }
+
     }
 }

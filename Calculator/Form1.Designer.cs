@@ -221,6 +221,7 @@
             this.resultBox.Size = new System.Drawing.Size(267, 47);
             this.resultBox.TabIndex = 8;
             this.resultBox.Text = "";
+       
             // 
             // percentButton
             // 
